@@ -6,6 +6,8 @@
 
 namespace G4\Crypto;
 
+use G4\Crypto\Adapter;
+
 class Crypt
 {
     /**
@@ -59,7 +61,7 @@ class Crypt
             throw new \Exception('Extension mcrypt is not installed.');
         }
 
-        $this->initVectorSize = mcrypt_get_iv_size($this->mcryptCipher, $this->mcryptMode);
+        $this->initVectorSize = Adapter::getIvSize($this->mcryptCipher, $this->mcryptMode);
     }
 
     /**
@@ -128,7 +130,7 @@ class Crypt
         $this->message = substr($this->message, $this->initVectorSize);
 
         $this->message = rtrim(
-            mcrypt_decrypt(
+            Adapter::decrypt(
                 $this->mcryptCipher,
                 $this->hashedEncryptionKey,
                 $this->message,
@@ -144,9 +146,9 @@ class Crypt
      */
     private function encrypt()
     {
-        $initVector = mcrypt_create_iv($this->initVectorSize, MCRYPT_RAND);
+        $initVector = Adapter::createIv($this->initVectorSize, MCRYPT_RAND);
 
-        $this->encryptedMessage = $initVector . mcrypt_encrypt(
+        $this->encryptedMessage = $initVector . Adapter::encrypt(
                 $this->mcryptCipher,
                 $this->hashedEncryptionKey,
                 $this->message,
