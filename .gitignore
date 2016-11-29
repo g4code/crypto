@@ -12,3 +12,8 @@ vendor
 .buildpath
 .project
 .settings
+.idea/
+.vagrant/
+
+tests/unit/coverage/*
+tests/integration/coverage/*
