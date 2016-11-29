@@ -10,6 +10,11 @@ use G4\Crypto\Adapter;
 
 class Crypt
 {
+
+    /**
+     * @var Adapter
+     */
+    private $adapter;
     /**
      * @var string
      */
@@ -55,13 +60,11 @@ class Crypt
      * Sets Initialization Vector size
      *
      */
-    public function __construct()
+    public function __construct(Adapter $adapter)
     {
-        if (!function_exists('mcrypt_encrypt')) {
-            throw new \Exception('Extension mcrypt is not installed.');
-        }
+        $this->adapter = $adapter;
 
-        $this->initVectorSize = Adapter::getIvSize($this->mcryptCipher, $this->mcryptMode);
+        $this->initVectorSize = $this->adapter->getIvSize($this->mcryptCipher, $this->mcryptMode);
     }
 
     /**
@@ -130,7 +133,7 @@ class Crypt
         $this->message = substr($this->message, $this->initVectorSize);
 
         $this->message = rtrim(
-            Adapter::decrypt(
+            $this->adapter->decrypt(
                 $this->mcryptCipher,
                 $this->hashedEncryptionKey,
                 $this->message,
@@ -146,9 +149,9 @@ class Crypt
      */
     private function encrypt()
     {
-        $initVector = Adapter::createIv($this->initVectorSize, MCRYPT_RAND);
+        $initVector = $this->adapter->createIv($this->initVectorSize, MCRYPT_RAND);
 
-        $this->encryptedMessage = $initVector . Adapter::encrypt(
+        $this->encryptedMessage = $initVector . $this->adapter->encrypt(
                 $this->mcryptCipher,
                 $this->hashedEncryptionKey,
                 $this->message,

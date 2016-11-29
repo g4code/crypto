@@ -1,5 +1,8 @@
 <?php
 
+use G4\Crypto\Crypt;
+use G4\Crypto\Adapter;
+
 class UsageTest extends \PHPUnit_Framework_TestCase
 {
 
@@ -7,7 +10,7 @@ class UsageTest extends \PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        $this->crypto = new \G4\Crypto\Crypt();
+        $this->crypto = new Crypt(new Adapter());
         $this->crypto->setEncryptionKey('tHi5Is');
     }
 
