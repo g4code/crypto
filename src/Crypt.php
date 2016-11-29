@@ -15,6 +15,7 @@ class Crypt
      * @var Adapter
      */
     private $adapter;
+
     /**
      * @var string
      */
@@ -36,20 +37,6 @@ class Crypt
     private $initVectorSize;
 
     /**
-     * Mcrypt cipher consts
-     *
-     * @var string
-     */
-    private $mcryptCipher = MCRYPT_RIJNDAEL_256;
-
-    /**
-     * Mcrypt mode consts
-     *
-     * @var string
-     */
-    private $mcryptMode = MCRYPT_MODE_CBC;
-
-    /**
      * @var string
      */
     private $message;
@@ -64,7 +51,7 @@ class Crypt
     {
         $this->adapter = $adapter;
 
-        $this->initVectorSize = $this->adapter->getIvSize($this->mcryptCipher, $this->mcryptMode);
+        $this->initVectorSize = $this->adapter->getIvSize();
     }
 
     /**
@@ -134,10 +121,8 @@ class Crypt
 
         $this->message = rtrim(
             $this->adapter->decrypt(
-                $this->mcryptCipher,
                 $this->hashedEncryptionKey,
                 $this->message,
-                $this->mcryptMode,
                 $initVector
             ),
             "\0"
@@ -149,13 +134,11 @@ class Crypt
      */
     private function encrypt()
     {
-        $initVector = $this->adapter->createIv($this->initVectorSize, MCRYPT_RAND);
+        $initVector = $this->adapter->createIv($this->initVectorSize);
 
         $this->encryptedMessage = $initVector . $this->adapter->encrypt(
-                $this->mcryptCipher,
                 $this->hashedEncryptionKey,
                 $this->message,
-                $this->mcryptMode,
                 $initVector
             );
 
