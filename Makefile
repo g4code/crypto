@@ -7,10 +7,8 @@ unit-tests:
 integration-tests:
 	@/bin/echo -e "${TITLE} starting virtual machine ..." \
 	&& vagrant up \
-	&& /bin/echo -e "${TITLE} importing clear database ..." \
-	&& vagrant provision --provision-with test \
 	&& /bin/echo -e "${TITLE} starting integration test suite ..." \
-	&& ./vendor/bin/phpunit -c tests/integration/phpunit.xml --coverage-html tests/integration/coverage \
+	&& vagrant provision --provision-with test \
 	&& /bin/echo -e "${TITLE} stopping virtual machine ..." \
 	&& vagrant halt
 

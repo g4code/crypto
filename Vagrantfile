@@ -27,4 +27,9 @@ Vagrant.configure(2) do |config|
         chef.add_recipe 'engine::php5'
     end
 
+    config.vm.provision "test", type: "chef_solo" do |chef|
+        chef.channel = "stable"
+        chef.version = "12.10.24"
+        chef.add_recipe 'engine::test'
+    end
 end
