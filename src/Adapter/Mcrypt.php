@@ -43,12 +43,12 @@ class Mcrypt implements AdapterInterface
         return mcrypt_create_iv($size, $this->source);
     }
 
-    public function encrypt($key, $data, $iv = null)
+    public function encrypt($key, $data, $iv)
     {
         return mcrypt_encrypt($this->cipher, $key, $data, $this->mode, $iv);
     }
 
-    public function decrypt($key, $data, $iv = null)
+    public function decrypt($key, $data, $iv)
     {
         return mcrypt_decrypt($this->cipher, $key, $data, $this->mode, $iv);
     }
