@@ -1,16 +1,16 @@
 <?php
 
 use G4\Crypto\Crypt;
-use G4\Crypto\Adapter;
+use G4\Crypto\Adapter\Mcrypt;
 
-class UsageTest extends \PHPUnit_Framework_TestCase
+class UsageMcryptTest extends \PHPUnit_Framework_TestCase
 {
 
     private $crypto;
 
     protected function setUp()
     {
-        $this->crypto = new Crypt(new Adapter());
+        $this->crypto = new Crypt(new Mcrypt());
         $this->crypto->setEncryptionKey('tHi5Is');
     }
 

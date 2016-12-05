@@ -6,7 +6,7 @@
 
 namespace G4\Crypto;
 
-use G4\Crypto\Adapter;
+use G4\Crypto\Adapter\AdapterInterface;
 
 class Crypt
 {
@@ -43,11 +43,9 @@ class Crypt
 
 
     /**
-     * Determine if mcrypt extension is installed
      * Sets Initialization Vector size
-     *
      */
-    public function __construct(Adapter $adapter)
+    public function __construct(AdapterInterface $adapter)
     {
         $this->adapter = $adapter;
 

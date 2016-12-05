@@ -1,8 +1,8 @@
 <?php
 
-namespace G4\Crypto;
+namespace G4\Crypto\Adapter;
 
-class Adapter
+class Mcrypt implements AdapterInterface
 {
 
     /**
@@ -27,6 +27,10 @@ class Adapter
     private $source = MCRYPT_RAND;
 
 
+    /**
+     * Mcrypt constructor.
+     * Determine if mcrypt extension is installed
+     */
     public function __construct()
     {
         if (!function_exists('mcrypt_encrypt')) {
