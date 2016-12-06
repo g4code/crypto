@@ -6,14 +6,14 @@ class Mcrypt implements AdapterInterface
 {
 
     /**
-     * Mcrypt cipher consts
+     * Mcrypt cipher constant
      *
      * @var string
      */
     private $cipher = MCRYPT_RIJNDAEL_256;
 
     /**
-     * Mcrypt mode consts
+     * Mcrypt mode constant
      *
      * @var string
      */
