@@ -52,11 +52,11 @@ $message = $crypto->decode($encryptedMessage);
 
 ### Install dependencies
 
-    $ make install
+    $ composer install
 
 ### Run tests
 
-    $ make test
+    $ make integration-tests
 
 ## License
 
