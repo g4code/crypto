@@ -16,6 +16,6 @@
     "phpunit/phpunit": "3.7.*"
   },
   "require": {
-    "ext-mcrypt": "*"
+    "phpseclib/mcrypt_compat": "1.*"
   }
 }
