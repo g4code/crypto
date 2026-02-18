@@ -101,7 +101,7 @@ class Crypt
      */
     private function decrypt()
     {
-        $this->message = $this->base64url_decode($this->encryptedMessage);
+        $this->message = $this->base64urlDecode($this->encryptedMessage);
 
         $cipher = new Cipher($this->message, $this->hashedEncryptionKey);
 
@@ -135,14 +135,14 @@ class Crypt
         $initVector = $this->adapter->createIv($this->initVectorSize);
 
         $this->encryptedMessage = $initVector . $this->adapter->encrypt(
-                $this->hashedEncryptionKey,
-                $this->message,
-                $initVector
-            );
+            $this->hashedEncryptionKey,
+            $this->message,
+            $initVector
+        );
 
         $cipher = new Cipher($this->encryptedMessage, $this->hashedEncryptionKey);
 
-        $this->encryptedMessage = $this->base64url_encode($cipher->addCipherNoise());
+        $this->encryptedMessage = $this->base64urlEncode($cipher->addCipherNoise());
     }
 
     /**
@@ -151,7 +151,7 @@ class Crypt
      * @param $data
      * @return string
      */
-    function base64url_encode($data)
+    private function base64urlEncode($data)
     {
         return rtrim(strtr(base64_encode($data), '+/', '-_'), '=');
     }
@@ -162,9 +162,8 @@ class Crypt
      * @param $data
      * @return string
      */
-    function base64url_decode($data)
+    private function base64urlDecode($data)
     {
         return base64_decode(str_pad(strtr($data, '-_', '+/'), strlen($data) % 4, '=', STR_PAD_RIGHT));
     }
-
 }

@@ -51,7 +51,6 @@ class Cipher
     public function addCipherNoise()
     {
         for ($i = 0, $j = 0, $ld = strlen($this->data), $lk = strlen($this->key); $i < $ld; ++$i, ++$j) {
-
             if ($j >= $lk) {
                 $j = 0;
             }
@@ -69,7 +68,6 @@ class Cipher
     public function removeCipherNoise()
     {
         for ($i = 0, $j = 0, $ld = strlen($this->data), $lk = strlen($this->key); $i < $ld; ++$i, ++$j) {
-
             if ($j >= $lk) {
                 $j = 0;
             }

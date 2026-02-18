@@ -13,9 +13,39 @@
     "psr-4": {"G4\\Crypto\\": "src/"}
   },
   "require-dev": {
-    "phpunit/phpunit": "3.7.*"
+    "phpunit/phpunit": "^11.0",
+    "squizlabs/php_codesniffer": "3.*",
+    "g4/code-coverage": "2.*"
   },
   "require": {
-    "phpseclib/mcrypt_compat": "1.*"
+    "php": ">=8.3",
+    "phpseclib/mcrypt_compat": "2.*"
+  },
+  "scripts": {
+    "unit-test": [
+      "php8.3 ./vendor/bin/phpunit -c tests/unit/phpunit.xml"
+    ],
+    "integration-test": [
+      "php8.3 ./vendor/bin/phpunit -c tests/integration/phpunit.xml"
+    ],
+    "test": [
+      "@unit-test",
+      "@integration-test"
+    ],
+    "test-coverage": [
+      "XDEBUG_MODE=coverage php8.3 ./vendor/bin/phpunit --colors=always -c tests/unit/phpunit.xml --coverage-text  --coverage-html tests/unit/coverage"
+    ],
+    "test-report": [
+      "XDEBUG_MODE=coverage php8.3 ./vendor/bin/phpunit --colors=always -c tests/unit/phpunit.xml --coverage-clover=tests/unit/coverage/code-coverage.xml"
+    ],
+    "code-coverage": [
+      "php8.3 ./vendor/bin/code-coverage -p 90 -f tests/unit/coverage/code-coverage.xml"
+    ],
+    "psr2": [
+      "php8.3 ./vendor/bin/phpcs --colors --standard=PSR2 src/"
+    ],
+    "psr2-fix": [
+      "php8.3 ./vendor/bin/phpcbf --colors --standard=PSR2 src/"
+    ]
   }
 }

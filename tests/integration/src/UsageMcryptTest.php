@@ -2,24 +2,25 @@
 
 use G4\Crypto\Crypt;
 use G4\Crypto\Adapter\Mcrypt;
+use PHPUnit\Framework\TestCase;
 
-class UsageMcryptTest extends \PHPUnit_Framework_TestCase
+class UsageMcryptTest extends TestCase
 {
 
     private $crypto;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->crypto = new Crypt(new Mcrypt());
         $this->crypto->setEncryptionKey('tHi5Is');
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         $this->crypto = null;
     }
 
-    public function testUsage()
+    public function testUsage(): void
     {
         $encryptedMessage = $this->crypto->encode('new message');
 

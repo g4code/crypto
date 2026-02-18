@@ -2,7 +2,11 @@ TITLE = [crypto]
 
 unit-tests:
 	@/bin/echo -e "${TITLE} unit test suite started..." \
-	&& ./vendor/bin/phpunit -c tests/unit/phpunit.xml --coverage-html tests/unit/coverage
+	&& ./vendor/bin/phpunit -c tests/unit/phpunit.xml
+
+unit-tests-coverage:
+	@/bin/echo -e "${TITLE} unit test suite with coverage started..." \
+	&& XDEBUG_MODE=coverage ./vendor/bin/phpunit -c tests/unit/phpunit.xml --coverage-html tests/unit/coverage
 
 integration-tests:
 	@/bin/echo -e "${TITLE} starting virtual machine ..." \

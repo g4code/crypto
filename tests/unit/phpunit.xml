@@ -4,10 +4,10 @@
         <directory>./src</directory>
     </testsuite>
 
-    <filter>
-        <whitelist>
+    <source>
+        <include>
             <directory suffix=".php">../../src/</directory>
-        </whitelist>
-    </filter>
+        </include>
+    </source>
 
 </phpunit>
